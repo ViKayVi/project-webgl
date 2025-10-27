@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "src/classes/Sketch.js"
+    "src/types/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
