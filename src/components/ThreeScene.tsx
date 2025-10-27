@@ -35,6 +35,7 @@ export default function ThreeScene() {
       mesh.rotation.x = time / 2000;
       mesh.rotation.y = time / 1000;
 
+      controls.update();
       renderer.render(scene, camera);
     };
 
