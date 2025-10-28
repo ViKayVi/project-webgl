@@ -1,9 +1,7 @@
-import ThreeScene from "@/components/ThreeScene";
+"use client";
+
+import ThreeGallery from "@/components/ThreeGallery";
 
 export default function Home() {
-  return (
-    <div className="h-screen w-full bg-sky-400">
-      <ThreeScene />
-    </div>
-  );
+  return <ThreeGallery />;
 }
