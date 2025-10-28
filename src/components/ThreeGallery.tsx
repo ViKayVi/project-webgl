@@ -60,8 +60,8 @@ const ThreeGallery = () => {
     const slideWidthVertical = 2.0;
     const slideHeightVertical = 3.0;
     const gap = 0.01;
-    const slideCount = 24;
-    const imagesCount = 24;
+    const slideCount = 20;
+    const imagesCount = 20;
     const totalWidth = slideCount * (slideWidthHorizontal + gap);
     const slideUnit = slideWidthHorizontal + gap;
 
@@ -146,7 +146,7 @@ const ThreeGallery = () => {
             32,
             16
           );
-          mesh.geometry.dispose(); // Limpiar geometría anterior
+          mesh.geometry.dispose();
           mesh.geometry = newGeometry;
 
           mesh.userData.originalVertices = [
@@ -186,11 +186,9 @@ const ThreeGallery = () => {
         slide.userData.targetX = slide.position.x;
         slide.userData.currentX = slide.position.x;
 
-        // Avanzar la posición para la siguiente imagen
         currentX += slidePositions[index] + gap;
       });
 
-      // Centrar toda la galería
       const totalWidth = currentX - gap;
       state.slides!.forEach((slide) => {
         slide.position.x -= totalWidth / 2;
@@ -198,19 +196,16 @@ const ThreeGallery = () => {
         slide.userData.currentX = slide.position.x;
       });
     };
-    // Crear slides
     for (let i = 0; i < slideCount; i++) {
       createSlide(i);
     }
 
-    // Posicionar slides
     state.slides.forEach((slide) => {
       slide.position.x -= totalWidth / 2;
       slide.userData.targetX = slide.position.x;
       slide.userData.currentX = slide.position.x;
     });
 
-    // Función para actualizar curva
     const updateCurve = (
       mesh: THREE.Mesh,
       worldPositionX: number,
@@ -248,7 +243,6 @@ const ThreeGallery = () => {
       mesh.geometry.computeVertexNormals();
     };
 
-    // Event Listeners
     const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
         state.targetPosition += slideUnit;
@@ -327,7 +321,6 @@ const ThreeGallery = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    // Función de animación
     const animate = (time: number) => {
       state.animationId = requestAnimationFrame(animate);
 
@@ -415,7 +408,6 @@ const ThreeGallery = () => {
       renderer.render(scene, camera);
     };
 
-    // Agregar event listeners
     window.addEventListener("keydown", handleKeydown);
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: false });
@@ -423,10 +415,8 @@ const ThreeGallery = () => {
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("resize", handleResize);
 
-    // Iniciar animación
     animate(0);
 
-    // Cleanup
     return () => {
       window.removeEventListener("keydown", handleKeydown);
       window.removeEventListener("wheel", handleWheel);
@@ -439,7 +429,6 @@ const ThreeGallery = () => {
         cancelAnimationFrame(state.animationId);
       }
 
-      // Limpiar Three.js
       state.slides?.forEach((slide) => {
         slide.geometry.dispose();
         if (slide.material instanceof THREE.Material) {
