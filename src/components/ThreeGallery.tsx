@@ -60,8 +60,8 @@ const ThreeGallery = () => {
     const slideWidthVertical = 2.0;
     const slideHeightVertical = 3.0;
     const gap = 0.01;
-    const slideCount = 20;
-    const imagesCount = 20;
+    const slideCount = 47;
+    const imagesCount = 47;
     const totalWidth = slideCount * (slideWidthHorizontal + gap);
     const slideUnit = slideWidthHorizontal + gap;
 
@@ -415,7 +415,7 @@ const ThreeGallery = () => {
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("resize", handleResize);
 
-    animate(0);
+    animate(performance.now());
 
     return () => {
       window.removeEventListener("keydown", handleKeydown);
